@@ -4,18 +4,16 @@ services:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
-      - ./config:/config
+      - ./homeassistant_config:/config
     network_mode: "host"
     restart: unless-stopped
+
   portainer:
-    image: portainer/portainer
     container_name: portainer
+    image: portainer/portainer-ce:latest
     ports:
       - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./config:/data
+      - ./portainer_data:/data
     restart: always
-  volumes:
-    portainer_data:
-      driver: local
